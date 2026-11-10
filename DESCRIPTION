@@ -1,0 +1,26 @@
+Package: dem30mDownloadR
+Type: Package
+Title: Download 30 Meter GEDTM30 Elevation Data
+Version: 0.1.0
+Depends:
+    R (>= 4.1.0)
+Authors@R: person("Yihao", "Xin", email = "xinyihao123@foxmail.com",
+    role = c("aut", "cre"))
+Author: Yihao Xin [aut, cre]
+Maintainer: Yihao Xin <xinyihao123@foxmail.com>
+Description: Downloads 30 meter global elevation data from OpenTopography
+    for a polygon boundary. The package reads an API key from a local text
+    file, supports GeoJSON and shapefile boundaries, automatically selects a
+    meter-based UTM coordinate reference system, and writes a masked GeoTIFF.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+Imports:
+    httr2,
+    jsonlite,
+    sf,
+    terra
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Config/roxygen2/version: 8.1.0
