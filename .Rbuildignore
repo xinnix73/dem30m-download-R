@@ -1,0 +1,5 @@
+^\.git$
+^\.gitignore$
+^\.Rbuildignore$
+^dem30mDownloadR\.Rproj$
+^README\.Rmd$
