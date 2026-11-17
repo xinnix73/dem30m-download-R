@@ -7,7 +7,10 @@
 
 ```r
 install.packages("remotes")
-remotes::install_github("xinnix73/dem30m-download-R")
+remotes::install_github(
+  "xinnix73/dem30m-download-R",
+  build_vignettes = TRUE
+)
 ```
 
 The package requires the spatial packages `sf` and `terra`.
@@ -46,6 +49,14 @@ The following figure shows the sample 30 m DEM with hillshade and the
 boundary outline.
 
 ![SCBI GEDTM30 DEM overview](inst/extdata/GEDTM30_DEM_overview.png)
+
+## Vignette
+
+After installation, open the reproducible example with:
+
+```r
+vignette("gedtm30-example", package = "dem30mDownloadR")
+```
 
 ## License
 

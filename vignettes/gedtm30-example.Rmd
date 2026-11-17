@@ -1,0 +1,147 @@
+---
+title: "Exploring the SCBI GEDTM30 Sample Data"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploring the SCBI GEDTM30 Sample Data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 5,
+  dpi = 150,
+  warning = FALSE,
+  message = FALSE
+)
+set.seed(712)
+```
+
+## Objective
+
+This vignette demonstrates how to locate, read, summarize, and visualize the
+sample boundary and DEM distributed with `dem30mDownloadR`. The example uses
+only package-internal files resolved with `system.file()`, so it can be run
+after installation on another machine.
+
+## Load packages
+
+```{r packages}
+library(dem30mDownloadR)
+library(sf)
+library(terra)
+```
+
+## Locate the package data
+
+```{r locate-data}
+dem_path <- system.file(
+  "extdata", "GEDTM30_API_original.tif",
+  package = "dem30mDownloadR"
+)
+boundary_path <- system.file(
+  "extdata", "boundary_buffer.geojson",
+  package = "dem30mDownloadR"
+)
+
+stopifnot(nzchar(dem_path), nzchar(boundary_path))
+c(dem = dem_path, boundary = boundary_path)
+```
+
+## Read and inspect the data
+
+```{r read-data}
+dem <- rast(dem_path)
+boundary <- st_read(boundary_path, quiet = TRUE)
+boundary_dem <- st_transform(boundary, crs(dem))
+
+dem
+```
+
+The DEM is a one-band elevation raster. We next calculate basic summary
+statistics in metres:
+
+```{r summary}
+values <- values(dem, mat = FALSE)
+summary_table <- data.frame(
+  statistic = c("Minimum", "Mean", "Median", "Maximum"),
+  elevation_m = c(
+    min(values, na.rm = TRUE),
+    mean(values, na.rm = TRUE),
+    median(values, na.rm = TRUE),
+    max(values, na.rm = TRUE)
+  )
+)
+summary_table
+```
+
+The raster extent and boundary should overlap. If they do not, loading or
+coordinate-system transformation is incorrect:
+
+```{r overlap}
+dem_extent <- ext(dem)
+dem_bbox_coordinates <- rbind(
+  c(dem_extent[1], dem_extent[3]),
+  c(dem_extent[2], dem_extent[3]),
+  c(dem_extent[2], dem_extent[4]),
+  c(dem_extent[1], dem_extent[4]),
+  c(dem_extent[1], dem_extent[3])
+)
+dem_bbox_sf <- st_sfc(
+  st_polygon(list(dem_bbox_coordinates)),
+  crs = 4326
+)
+
+boundary_in_dem <- st_intersects(
+  dem_bbox_sf,
+  boundary_dem,
+  sparse = FALSE
+)[1, 1]
+
+boundary_in_dem
+```
+
+## Visualize elevation
+
+The displayed color range uses the observed minimum and maximum so that the
+full elevation contrast is preserved.
+
+```{r dem-map, fig.alt="Map of the SCBI GEDTM30 sample DEM with a study-area boundary and 50 metre contours."}
+elevation_range <- range(values, na.rm = TRUE)
+colors <- colorRampPalette(c(
+  "#5B1A18", "#A52A2A", "#E66101", "#FDB863",
+  "#FFFFBF", "#A6D96A", "#1A9850", "#006837"
+))(100)
+
+plot(
+  dem,
+  col = colors,
+  zlim = elevation_range,
+  axes = TRUE,
+  main = "SCBI GEDTM30 30 m DEM",
+  xlab = "Longitude",
+  ylab = "Latitude",
+  plg = list(title = "Elevation\n(m)")
+)
+
+contours <- as.contour(dem, levels = seq(250, 650, by = 50))
+plot(contours, add = TRUE, col = "#333333", lwd = 0.7)
+plot(boundary_dem, add = TRUE, col = NA, border = "#000000", lwd = 2)
+legend(
+  "bottomleft",
+  legend = c("Boundary", "50 m contours"),
+  col = c("#000000", "#333333"),
+  lwd = c(2, 1),
+  bty = "n"
+)
+```
+
+## Interpretation
+
+The statistics and map show the spatial distribution of elevation within the
+sample area. These values are intended to demonstrate package data access and
+visualization; they are not a substitute for a complete terrain or ecological
+analysis.
