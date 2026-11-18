@@ -1,4 +1,4 @@
-#' Download a 30 m GEDTM30 DEM for a polygon boundary
+#' Download 30 m GEDTM30 DTM data for a polygon boundary
 #'
 #' @description
 #' Reads an OpenTopography API key from a local text file, downloads the

@@ -4,15 +4,15 @@
 \name{dem30mDownloadR-package}
 \alias{dem30mDownloadR}
 \alias{dem30mDownloadR-package}
-\title{dem30mDownloadR: Download 30 m GEDTM30 elevation data}
+\title{dem30mDownloadR: Download 30 m GEDTM30 digital terrain model data}
 \description{
-The package downloads GEDTM30 elevation data from OpenTopography for a
+The package downloads GEDTM30 digital terrain model data from OpenTopography for a
 polygon boundary. It supports GeoJSON and ESRI Shapefile inputs, reads API
 keys from a local text file, selects a suitable UTM coordinate reference
 system, and writes a masked GeoTIFF.
 }
 \references{
-OpenTopography Global DEM API:
+OpenTopography Global DEM API, providing GEDTM30 DTM data:
 \url{https://portal.opentopography.org/apidocs/#/Public/getGlobalDem}
 }
 \author{

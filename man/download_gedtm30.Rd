@@ -2,7 +2,7 @@
 % Please edit documentation in R/download_gedtm30.R
 \name{download_gedtm30}
 \alias{download_gedtm30}
-\title{Download a 30 m GEDTM30 DEM for a polygon boundary}
+\title{Download 30 m GEDTM30 DTM data for a polygon boundary}
 \usage{
 download_gedtm30(
   vector_path,

@@ -1,8 +1,8 @@
 ---
-title: "Exploring the SCBI GEDTM30 Sample Data"
+title: "Exploring the SCBI GEDTM30 DTM Sample Data"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Exploring the SCBI GEDTM30 Sample Data}
+  %\VignetteIndexEntry{Exploring the SCBI GEDTM30 DTM Sample Data}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -23,7 +23,7 @@ set.seed(712)
 ## Objective
 
 This vignette demonstrates how to locate, read, summarize, and visualize the
-sample boundary and DEM distributed with `dem30mDownloadR`. The example uses
+sample boundary and Digital Terrain Model distributed with `dem30mDownloadR`. The example uses
 only package-internal files resolved with `system.file()`, so it can be run
 after installation on another machine.
 
@@ -61,7 +61,7 @@ boundary_dem <- st_transform(boundary, crs(dem))
 dem
 ```
 
-The DEM is a one-band elevation raster. We next calculate basic summary
+The DTM is a one-band bare-earth elevation raster. We next calculate basic summary
 statistics in metres:
 
 ```{r summary}
@@ -109,7 +109,7 @@ boundary_in_dem
 The displayed color range uses the observed minimum and maximum so that the
 full elevation contrast is preserved.
 
-```{r dem-map, fig.alt="Map of the SCBI GEDTM30 sample DEM with a study-area boundary and 50 metre contours."}
+```{r dem-map, fig.alt="Map of the SCBI GEDTM30 sample DTM with a study-area boundary and 50 metre contours."}
 elevation_range <- range(values, na.rm = TRUE)
 colors <- colorRampPalette(c(
   "#5B1A18", "#A52A2A", "#E66101", "#FDB863",
@@ -121,7 +121,7 @@ plot(
   col = colors,
   zlim = elevation_range,
   axes = TRUE,
-  main = "SCBI GEDTM30 30 m DEM",
+  main = "SCBI GEDTM30 30 m DTM",
   xlab = "Longitude",
   ylab = "Latitude",
   plg = list(title = "Elevation\n(m)")

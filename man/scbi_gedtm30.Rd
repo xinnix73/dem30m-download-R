@@ -10,12 +10,12 @@ A one-band GeoTIFF stored in
 (EPSG:4326); nominal sample spacing: approximately 30 metres.
 }
 \source{
-OpenTopography Global DEM API, GEDTM30 dataset:
+OpenTopography Global DEM API, GEDTM30 DTM dataset:
 \url{https://portal.opentopography.org/}
 }
 \description{
-A 30 m GEDTM30 GeoTIFF downloaded for the example boundary. Elevation
-values are expressed in metres.
+A 30 m GEDTM30 Digital Terrain Model GeoTIFF downloaded for the example
+boundary. Bare-earth elevation values are expressed in metres.
 }
 \examples{
 dem_path <- system.file(

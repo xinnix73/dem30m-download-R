@@ -1,6 +1,6 @@
 # dem30mDownloadR
 
-`dem30mDownloadR` downloads 30 m GEDTM30 elevation data from
+`dem30mDownloadR` downloads 30 m GEDTM30 Digital Terrain Model (DTM) data from
 [OpenTopography](https://opentopography.org/) for a polygon boundary.
 
 ## Installation
@@ -43,12 +43,12 @@ The `inst/extdata/` directory contains the sample SCBI boundary, the original
 GEDTM30 GeoTIFF, and a preview image. The sample data are provided for
 demonstration and testing; do not commit an API key.
 
-### DEM overview
+### DTM overview
 
-The following figure shows the sample 30 m DEM with hillshade and the
+The following figure shows the sample 30 m GEDTM30 DTM with terrain shading and the
 boundary outline.
 
-![SCBI GEDTM30 DEM overview](inst/extdata/GEDTM30_DEM_overview.png)
+![SCBI GEDTM30 DTM overview](inst/extdata/GEDTM30_DEM_overview.png)
 
 ## Vignette
 

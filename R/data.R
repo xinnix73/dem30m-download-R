@@ -20,8 +20,8 @@ NULL
 
 #' SCBI GEDTM30 sample raster
 #'
-#' A 30 m GEDTM30 GeoTIFF downloaded for the example boundary. Elevation
-#' values are expressed in metres.
+#' A 30 m GEDTM30 Digital Terrain Model GeoTIFF downloaded for the example
+#' boundary. Bare-earth elevation values are expressed in metres.
 #'
 #' @format A one-band GeoTIFF stored in
 #'   `inst/extdata/GEDTM30_API_original.tif`. Horizontal CRS: WGS 84
@@ -34,6 +34,6 @@ NULL
 #'   "extdata", "GEDTM30_API_original.tif",
 #'   package = "dem30mDownloadR"
 #' )
-#' @source OpenTopography Global DEM API, GEDTM30 dataset:
+#' @source OpenTopography Global DEM API, GEDTM30 DTM dataset:
 #'   \url{https://portal.opentopography.org/}
 NULL
